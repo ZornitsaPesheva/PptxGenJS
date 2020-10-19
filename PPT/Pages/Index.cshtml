@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.3.1/dist/pptxgen.bundle.js"></script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<script>
+
+
+    var pptx = new PptxGenJS();
+
+    var slide = pptx.addSlide();
+
+    slide.addImage({ path: "/pics/OrgChart-JS-Wallpaper.jpg" });
+
+  //  slide.addImage({ path: "https://cdn.cdnparenting.com/articles/2018/10/15-things-you-must-do-after-the-birth-of-your-baby.jpg" });
+
+    pptx.writeFile('PptxGenJs-Basic-Slide-Demo');
+
+</script>
