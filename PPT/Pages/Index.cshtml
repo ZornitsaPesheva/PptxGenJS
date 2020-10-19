@@ -3,23 +3,50 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.3.1/dist/pptxgen.bundle.js"></script>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
+</div>
+<div id="tree" />
 
 <script>
+
+    function svg(nodeId) {
+        chart.exportSVG({
+            openInNewTab: true,
+        });
+    }
+
+    var chart = new OrgChart(document.getElementById("tree"), {
+        mouseScrool: OrgChart.action.none,
+        menu: {
+            export_svg: {
+                text: "Export SVG",
+                icon: OrgChart.icon.svg(24, 24, "#7A7A7A"),
+                onClick: svg
+            }
+        },
+        nodeBinding: {
+            field_0: "name",
+            field_1: "title",
+            img_0: "img"
+        },
+        nodes: [
+            { id: 1, name: "Billy Moore", title: "CEO", img: "https://cdn.balkan.app/shared/2.jpg" },
+            { id: 2, pid: 1, name: "Billie Rose", title: "Dev Team Lead", img: "https://cdn.balkan.app/shared/5.jpg" },
+
+            { id: 3, pid: 1, name: "Glenn Bell", title: "HR", img: "https://cdn.balkan.app/shared/10.jpg" },
+            { id: 4, pid: 3, name: "Blair Francis", title: "HR", img: "https://cdn.balkan.app/shared/11.jpg" }
+        ]
+    });    
 
 
     var pptx = new PptxGenJS();
 
     var slide = pptx.addSlide();
 
-    slide.addImage({ path: "/pics/OrgChart-JS-Wallpaper.jpg" });
+    slide.addImage({ path: "/pics/OrgChart.svg" });
 
   //  slide.addImage({ path: "https://cdn.cdnparenting.com/articles/2018/10/15-things-you-must-do-after-the-birth-of-your-baby.jpg" });
 
